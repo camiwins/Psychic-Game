@@ -54,7 +54,7 @@ document.onkeyup = function (event) {
 
     // Display user's 'current guess' on HTML page
     userChoiceText.textContent = "You chose: " + userGuess;
-    // Display all of user's guesses made on HTML page
+    // Display all of user's guesses made on HTML page and reset score when the length of guesses reaches 10 characters.
 
     // Display 'win' score on HTML page
     winsText.textContent = "Wins: " + wins;
