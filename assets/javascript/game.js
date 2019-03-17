@@ -1,50 +1,67 @@
-// Array of all the options (A-Z)
-var computerChoices = ["a", "b", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "y", "z"];
+// GAME VARIABLES AND ARRAYS
 
-// Variables that holds numbers of wins, losses, and guesses left
+// An array of the alphabet used for computer's choices
+var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+// Variables of 'wins', 'losses', 'guesses left' and 'current guesses' for tracking scores and guesses
+
 var wins = 0;
 var losses = 0;
-var guess= 5;
+var guessesLeft = 10;
 
-// Variables that holds references to places in the HTML where we want things displayed
-var directionsText = document.getElementById ("directions-text");
-var winsText = document.getElementById ("wins-text");
-var lossesText = document.getElementById ("losses-text");
-var guessesText = document.getElementById ("guesses-text");
-var userChoiceText = document.getElementById ("userchoice-text");
-var computerChoiceText = document.getElementById("computerchoice-text");
+// Variables to hold references and display them in HTML
+var userChoiceText = document.getElementById("userchoice-text");
+var winsText = document.getElementById("wins-text");
+var lossesText = document.getElementById("losses-text");
+var guessesLeftText = document.getElementById("guessesleft-text");
 
-// Player picks letter by pressing key
-document.onkeyup = function(event) {
+// GAME FUNCTION 
+
+// Function that runs when user presses a key
+document.onkeyup = function (event) {
+    // Function runs only if user picks a letter from A-Z to limit other keys being pressed
+
+    // This determines when a key was pressed
     var userGuess = event.key;
-    // Player's guesses are displayed on screen
 
-// Computer picks letter randomly from the A-Z array
-    var computerGuess = computerChoices [Math.floor(Math.random() * computerChoices.length)];
+    // Shows the user's current guesses, up to 10
+    console.log(userGuess)
 
-// If Player picks same letter as Computer...
-    if ((userGuess === computerChoices)) {
-    // add one point to Win and ...
-    wins ++;
+    // Computer randomly picks a letter, does not display it
+    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+    // Alerts the 'userGuess' and 'computerGuess'
+    console.log("Computer Guess: " + computerGuess);
+
+    // If User and Computer guesses are equal...
+    if (userGuess === computerGuess) {
+        // Add one to 'win' score
+        wins++;
     }
-    // game resets and ...
 
-    // computer chooses new letter ...
-
-// If Player picks different letter than Computer...
-    if ((userGuess != computerChoices)) {
-    (guess - 1);
+    // If user and Computer guesses are not equal
+    else if (userGuess != computerGuess) {
+        // Subtract one from 'guesses left'
+        guessesLeft--;
     }
-    // and remove one guess left ...
-    // player keeps on guessing
 
-// If no more guesses remaining then ...
-    // loss goes up by 1
-    // computer chooses new letter
+    // If there are 0 'guesses left'
+    if (guessesLeft === 0) {
+        // Add one to 'losses'
+        losses++;
+        guessesLeft = 10;
+    }
 
-// Displays user guess, win, losses and guesses left
+    // Display user's 'current guess' on HTML page
     userChoiceText.textContent = "You chose: " + userGuess;
+    // Display all of user's guesses made on HTML page
+
+    // Display 'win' score on HTML page
     winsText.textContent = "Wins: " + wins;
+    // Display 'losses' score on HTML page
     lossesText.textContent = "Losses: " + losses;
-    guessesText.textContent = "Guesses Left: " + guess;
-}
+    // Display 'guesses left' on HTML page
+    guessesLeftText.textContent = "Guesses Left: " + guessesLeft;
+
+};
+
